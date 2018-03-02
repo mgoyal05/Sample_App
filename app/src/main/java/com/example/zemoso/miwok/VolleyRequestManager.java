@@ -15,7 +15,9 @@ public class VolleyRequestManager {
     private static final String TAG = VolleyRequestManager.class.getSimpleName();
 
     private static VolleyRequestManager mInstance;
+    
     private RequestQueue mRequestQueue;
+    
     private Context mContext;
 
 
