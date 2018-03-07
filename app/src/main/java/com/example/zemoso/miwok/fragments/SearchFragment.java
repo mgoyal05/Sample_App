@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +21,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.zemoso.miwok.R;
+import com.example.zemoso.miwok.models.RepoObject;
+import com.example.zemoso.miwok.utils.RepoObjectRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,7 +45,9 @@ public class SearchFragment extends Fragment {
      */
     final static String PARAM_SORT = "sort";
 
-    TextView result;
+
+
+    TextView mResultTextView;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.search_fragment,container, false );
         fetchdata(getContext());
-        result = rootView.findViewById(R.id.tv_url_display1);
+        mResultTextView = rootView.findViewById(R.id.tv_url_display1);
         return rootView;
     }
 
@@ -75,7 +75,7 @@ public class SearchFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 try {
                     String s =response.getString("items");
-                    result.setText(s);
+                    mResultTextView.setText(s);
                     Log.v("THE FINAL ANSWER", s);
                 }
                 catch (JSONException e){
@@ -96,6 +96,33 @@ public class SearchFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void fetchRepoData(final Context context, String url){
+        Response.Listener<RepoObject> responseListner = new Response.Listener<RepoObject>() {
+            @Override
+            public void onResponse(RepoObject response) {
+                try {
+                    String s =response.getFullName();
+                    mResultTextView.setText(s);
+                    Log.v("THE FINAL ANSWER", s);
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("ERROR", "Internet");
+            }
+        };
+
+        RepoObjectRequest repoObjectRequest = new JsonObjectRequest(Request.Method.GET, SAMPLE_URL, null, responseListner, errorListener);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        requestQueue.add(repoObjectRequest);
+    }
     }
 
     @Override
