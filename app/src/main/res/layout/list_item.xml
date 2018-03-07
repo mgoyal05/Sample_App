@@ -14,18 +14,17 @@
      limitations under the License.
 -->
 <!-- Layout for a single list item -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="16dp">
-
+    android:stretchColumns="0,1,2"
+    android:paddingBottom="22sp">
+<TableRow>
     <TextView
         android:id="@+id/position_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="40sp"
         android:textAlignment="center"
         android:textSize="22sp"
         android:background="@color/category_colors"
@@ -33,9 +32,8 @@
 
     <TextView
         android:id="@+id/miwok_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="40sp"
         android:textAlignment="center"
         android:textSize="22sp"
         android:background="@color/category_numbers"
@@ -43,12 +41,11 @@
 
     <TextView
         android:id="@+id/default_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="40sp"
         android:textAlignment="center"
         android:textSize="22sp"
         android:background="@color/category_family"
         tools:text="one" />
-
-</LinearLayout>
+</TableRow>
+</TableLayout>
