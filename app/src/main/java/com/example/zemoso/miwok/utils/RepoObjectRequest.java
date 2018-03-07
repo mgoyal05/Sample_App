@@ -1,11 +1,16 @@
 package com.example.zemoso.miwok.utils;
 
+import android.util.Log;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonRequest;
 import com.example.zemoso.miwok.models.RepoObject;
+
+import org.json.JSONException;
 
 import java.io.UnsupportedEncodingException;
 
@@ -13,10 +18,26 @@ import java.io.UnsupportedEncodingException;
  * Created by zemoso on 5/3/18.
  */
 
-public class RepoObjectRequest extends JsonRequest<RepoObject> {
+public class RepoObjectRequest extends Request<RepoObject> {
+
+    /**
+     * Default charset for JSON request.
+     */
+    protected static final String PROTOCOL_CHARSET = "utf-8";
+
+    /**
+     * Content type for request.
+     */
+    private static final String PROTOCOL_CONTENT_TYPE =
+            String.format("application/json; charset=%s", PROTOCOL_CHARSET);
+
+    private final Listener<RepoObject> mListener;
+    private final String mRequestBody;
 
     public RepoObjectRequest(int method, String url, String requestBody, Response.Listener<RepoObject> listener, Response.ErrorListener errorListener) {
-        super(method, url, requestBody, listener, errorListener);
+        super(method, url, errorListener);
+        mListener = listener;
+        mRequestBody = requestBody;
     }
 
     @Override
@@ -24,10 +45,20 @@ public class RepoObjectRequest extends JsonRequest<RepoObject> {
         try {
             String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
-            return Response.success(new RepoObject(jsonString),
+            Log.v("REQUEST", jsonString);
+            Log.v("RESPONSE", response.data.toString());
+            return Response.success(new RepoObject(jsonString).convertRepoObject(),
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
+        } catch (JSONException je) {
+            je.printStackTrace();
+            return Response.error(new ParseError(je));
         }
+    }
+
+    @Override
+    protected void deliverResponse(RepoObject response) {
+        mListener.onResponse(response);
     }
 }

@@ -14,24 +14,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Scanner;
-
 import io.realm.Realm;
 
 /**
  * Created by zemoso on 7/3/18.
  */
 
-public class APIRepositories {
+public class APIRepoResults {
 
-    private static APIRepositories sInstance = null;
+    private static APIRepoResults sInstance = null;
 
-    public APIRepositories() {
+    public APIRepoResults() {
     }
 
-    public synchronized static APIRepositories getInstance(){
+    public synchronized static APIRepoResults getInstance() {
         if(sInstance == null){
-            sInstance = new APIRepositories();
+            sInstance = new APIRepoResults();
         }
         return sInstance;
     }
@@ -72,7 +70,7 @@ public class APIRepositories {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, responseListner, errorListener);
 
-        mRequestQueue.add(repoObjectRequest);
+        VolleyRequestManager.getmInstance(context).getmRequestQueue().add(jsonObjectRequest);
     }
 
     public void fetchRepoObject(final Context context, String url){
@@ -101,7 +99,7 @@ public class APIRepositories {
 
         RepoObjectRequest repoObjectRequest = new RepoObjectRequest(Request.Method.GET, url, null, resultsListener, errorListener);
 
-        VolleyRequestManager.addRequest(repoObjectRequest);
+        VolleyRequestManager.getmInstance(context).getmRequestQueue().add(repoObjectRequest);
     }
 
 }
