@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.zemoso.miwok;
+package com.example.zemoso.miwok.models;
 
 /**
  * {@link Word} represents a vocabulary word that the user wants to learn.

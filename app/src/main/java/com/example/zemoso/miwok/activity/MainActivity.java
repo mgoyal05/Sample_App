@@ -1,14 +1,12 @@
-package com.example.zemoso.miwok;
+package com.example.zemoso.miwok.activity;
 
-import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.example.zemoso.miwok.fragments.CategoryAdapter;
+import com.example.zemoso.miwok.R;
+import com.example.zemoso.miwok.adapters.CategoryAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

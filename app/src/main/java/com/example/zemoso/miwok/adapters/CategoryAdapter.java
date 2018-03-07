@@ -1,8 +1,12 @@
-package com.example.zemoso.miwok.fragments;
+package com.example.zemoso.miwok.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.zemoso.miwok.fragments.ColorsFragment;
+import com.example.zemoso.miwok.fragments.NumbersFragment;
+import com.example.zemoso.miwok.fragments.SearchFragment;
 
 /**
  * Created by zemoso on 28/2/18.

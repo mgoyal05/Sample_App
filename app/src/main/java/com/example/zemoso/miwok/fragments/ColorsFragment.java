@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.zemoso.miwok.R;
-import com.example.zemoso.miwok.Word;
-import com.example.zemoso.miwok.WordAdapter;
+import com.example.zemoso.miwok.models.Word;
+import com.example.zemoso.miwok.adapters.WordAdapter;
 
 import java.util.ArrayList;
 
