@@ -7,12 +7,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.zemoso.miwok.VolleyRequestManager;
 import com.example.zemoso.miwok.models.RepoObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -75,16 +76,16 @@ public class APIRepoResults {
 
     public void fetchRepoObject(final Context context, String url){
 
-        Response.Listener<RepoObject> resultsListener = new Response.Listener<RepoObject>() {
+        Response.Listener<List<RepoObject>> resultsListener = new Response.Listener<List<RepoObject>>() {
             @Override
-            public void onResponse(RepoObject response) {
+            public void onResponse(List<RepoObject> response) {
 /*                if(!mResultTextView.getText().equals("")){
                     mResultTextView.setText("");
                 }*/
                 Realm realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
-                RepoObject repoObject = response;
-                realm.insertOrUpdate(repoObject);
+                List<RepoObject> repoObject = response;
+                realm.insert(repoObject);
                 realm.commitTransaction();
                 realm.close();
             }

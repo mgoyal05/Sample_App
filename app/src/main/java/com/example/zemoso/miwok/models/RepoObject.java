@@ -1,10 +1,14 @@
 package com.example.zemoso.miwok.models;
 
-import android.util.Log;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import io.realm.RealmObject;
 
@@ -16,8 +20,10 @@ public class RepoObject extends RealmObject {
 
     private String jsonString;
 
+    @SerializedName("full_name")
     private String fullName;
 
+    @SerializedName("id")
     private String htmlUrl;
 
     public RepoObject() {
@@ -25,6 +31,23 @@ public class RepoObject extends RealmObject {
 
     public RepoObject(String jsonString) {
         this.jsonString = jsonString;
+    }
+
+    public static List<RepoObject> convertRepoObject(String jsonString) throws JSONException {
+
+        JSONObject jsonObject = new JSONObject(jsonString);
+        JSONArray results = jsonObject.optJSONArray("items");
+
+        return new GsonBuilder().create().fromJson(results.toString(), new TypeToken<List<RepoObject>>() {
+        }.getType());
+
+ /*       JSONArray results = jsonObject.getJSONArray("items");
+        for
+        repoObject.setFullName(results.getJSONObject(0).getString("full_name"));
+        repoObject.setHtmlUrl(results.getJSONObject(0).getString("html_url"));
+
+
+        return repoObject;*/
     }
 
     public String getFullName() {
@@ -41,19 +64,5 @@ public class RepoObject extends RealmObject {
 
     public void setHtmlUrl(String htmlUrl) {
         this.htmlUrl = htmlUrl;
-    }
-
-    public RepoObject convertRepoObject() throws JSONException {
-
-        RepoObject repoObject = new RepoObject();
-
-        JSONObject jsonObject = new JSONObject(jsonString);
-
-        JSONArray results = jsonObject.getJSONArray("items");
-
-        repoObject.setFullName(results.getJSONObject(0).getString("full_name"));
-        repoObject.setHtmlUrl(results.getJSONObject(0).getString("html_url"));
-
-        return repoObject;
     }
 }

@@ -3,6 +3,7 @@ package com.example.zemoso.miwok.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,13 +22,14 @@ import com.example.zemoso.miwok.utils.NetworkUtils;
 import java.net.URL;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends Fragment {
 
-    final static String SAMPLE_URL = "https://api.github.com/search/repositories?q=android&sort=stars";
+    final static String SAMPLE_URL = "https://api.androidhive.info/volley/person_array.json";
 
     private TextView mResultTextView;
 
@@ -70,8 +72,9 @@ public class SearchFragment extends Fragment {
 
             APIRepoResults.getInstance().fetchRepoObject(getContext(), url.toString());
             Realm realm = Realm.getDefaultInstance();
-            String s = realm.where(RepoObject.class).findFirst().getFullName();
-            mResultTextView.setText(s);
+            RealmResults<RepoObject> s = realm.where(RepoObject.class).findAll();
+            Log.v("RESPONSEOB", String.valueOf(s.size()));
+            mResultTextView.setText(s.size() + s.get(s.size() - 1).getHtmlUrl());
         }
         return true;
     }

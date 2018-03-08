@@ -13,12 +13,13 @@ import com.example.zemoso.miwok.models.RepoObject;
 import org.json.JSONException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * Created by zemoso on 5/3/18.
  */
 
-public class RepoObjectRequest extends Request<RepoObject> {
+public class RepoObjectRequest extends Request<List<RepoObject>> {
 
     /**
      * Default charset for JSON request.
@@ -31,23 +32,23 @@ public class RepoObjectRequest extends Request<RepoObject> {
     private static final String PROTOCOL_CONTENT_TYPE =
             String.format("application/json; charset=%s", PROTOCOL_CHARSET);
 
-    private final Listener<RepoObject> mListener;
+    private final Listener<List<RepoObject>> mListener;
     private final String mRequestBody;
 
-    public RepoObjectRequest(int method, String url, String requestBody, Response.Listener<RepoObject> listener, Response.ErrorListener errorListener) {
+    public RepoObjectRequest(int method, String url, String requestBody, Response.Listener<List<RepoObject>> listener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         mListener = listener;
         mRequestBody = requestBody;
     }
 
     @Override
-    protected Response<RepoObject> parseNetworkResponse(NetworkResponse response) {
+    protected Response<List<RepoObject>> parseNetworkResponse(NetworkResponse response) {
         try {
             String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
             Log.v("REQUEST", jsonString);
             Log.v("RESPONSE", response.data.toString());
-            return Response.success(new RepoObject(jsonString).convertRepoObject(),
+            return Response.success(RepoObject.convertRepoObject(jsonString),
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
@@ -58,7 +59,7 @@ public class RepoObjectRequest extends Request<RepoObject> {
     }
 
     @Override
-    protected void deliverResponse(RepoObject response) {
+    protected void deliverResponse(List<RepoObject> response) {
         mListener.onResponse(response);
     }
 }

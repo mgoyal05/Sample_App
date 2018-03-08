@@ -1,4 +1,4 @@
-package com.example.zemoso.miwok;
+package com.example.zemoso.miwok.utils;
 
 import android.content.Context;
 
