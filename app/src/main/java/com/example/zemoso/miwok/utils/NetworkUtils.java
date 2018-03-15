@@ -1,6 +1,7 @@
 package com.example.zemoso.miwok.utils;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,6 +39,7 @@ public class NetworkUtils {
             e.printStackTrace();
         }
 
+        Log.v("URL", url.toString());
         return url;
     }
 }

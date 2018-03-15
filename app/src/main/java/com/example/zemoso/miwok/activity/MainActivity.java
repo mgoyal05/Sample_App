@@ -1,8 +1,8 @@
 package com.example.zemoso.miwok.activity;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.zemoso.miwok.R;
@@ -24,4 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
     }
+
+
 }

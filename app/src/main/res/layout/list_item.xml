@@ -36,7 +36,6 @@
         android:layout_weight="1"
         android:background="@color/category_numbers"
         android:textAlignment="center"
-
         android:textSize="22sp"
         tools:text="lutti" />
 

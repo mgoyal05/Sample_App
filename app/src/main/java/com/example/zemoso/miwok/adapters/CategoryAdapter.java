@@ -26,7 +26,9 @@ public class CategoryAdapter extends FragmentPagerAdapter {
             case 1:
                 return new ColorsFragment();
             case 2:
-                return new SearchFragment();
+                return new SearchFragment();/*
+            case 3:
+                return new GMapFragment();*/
             default:
                 return null;
         }
@@ -45,7 +47,9 @@ public class CategoryAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Colors";
             case 2:
-                return "GitQuery";
+                return "GitQuery";/*
+            case 3:
+                return "Map";*/
         }
 
         return super.getPageTitle(position);

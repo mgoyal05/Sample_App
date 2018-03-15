@@ -1,7 +1,7 @@
 package com.example.zemoso.miwok;
 
 import android.app.Application;
-import android.content.Context;
+import android.util.Log;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -23,5 +23,6 @@ public class SampleApp extends Application {
 
 
         Realm.setDefaultConfiguration(configuration);
+        Log.v("STARTED REALM", String.valueOf(Realm.getDefaultInstance().isEmpty()));
     }
 }

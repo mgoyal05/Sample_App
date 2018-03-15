@@ -1,5 +1,7 @@
 package com.example.zemoso.miwok.models;
 
+import android.util.Log;
+
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
@@ -23,7 +25,7 @@ public class RepoObject extends RealmObject {
     @SerializedName("full_name")
     private String fullName;
 
-    @SerializedName("id")
+    @SerializedName("html_url")
     private String htmlUrl;
 
     public RepoObject() {
@@ -37,7 +39,7 @@ public class RepoObject extends RealmObject {
 
         JSONObject jsonObject = new JSONObject(jsonString);
         JSONArray results = jsonObject.optJSONArray("items");
-
+        Log.v("JSON RESULT", results.getString(0));
         return new GsonBuilder().create().fromJson(results.toString(), new TypeToken<List<RepoObject>>() {
         }.getType());
 
