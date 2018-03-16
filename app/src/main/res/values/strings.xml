@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Miwok</string>
 
+    <string name="search_hint">Search MyApp</string>
 
     <!-- Categfull_namename for the vocabulary words for colors [CHAR LIMIT=20] -->
     <string name="category_colors">Colors</string>

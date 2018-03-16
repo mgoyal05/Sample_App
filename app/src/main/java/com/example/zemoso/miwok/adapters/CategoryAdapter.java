@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.zemoso.miwok.fragments.ColorsFragment;
+import com.example.zemoso.miwok.fragments.GMapFragment;
+import com.example.zemoso.miwok.fragments.JsonResultSearchFragment;
 import com.example.zemoso.miwok.fragments.NumbersFragment;
 import com.example.zemoso.miwok.fragments.SearchFragment;
 
@@ -26,9 +28,11 @@ public class CategoryAdapter extends FragmentPagerAdapter {
             case 1:
                 return new ColorsFragment();
             case 2:
-                return new SearchFragment();/*
+                return new SearchFragment();
             case 3:
-                return new GMapFragment();*/
+                return new JsonResultSearchFragment();
+            case 4:
+                return new GMapFragment();
             default:
                 return null;
         }
@@ -36,7 +40,7 @@ public class CategoryAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
 
     @Override
@@ -47,9 +51,11 @@ public class CategoryAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Colors";
             case 2:
-                return "GitQuery";/*
+                return "GitQuery";
             case 3:
-                return "Map";*/
+                return "Map";
+            case 4:
+                return "JSON";
         }
 
         return super.getPageTitle(position);
