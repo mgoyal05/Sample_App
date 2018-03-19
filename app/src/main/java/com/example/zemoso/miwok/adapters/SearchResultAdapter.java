@@ -49,7 +49,7 @@ public class SearchResultAdapter extends BaseAdapter {
         if (convertView == null) {
             // If the view is not recycled, this creates a new ImageView to hold an image
             listItemView = LayoutInflater.from(mContext).inflate(
-                    R.layout.search_result_grid_item, parent, false);
+                    R.layout.search_result_list_item, parent, false);
 
         }
 
